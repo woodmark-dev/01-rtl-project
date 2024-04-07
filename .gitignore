@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 
-src/App.spec.tsx
+src/App.spec.done.tsx
 
 # Editor directories and files
 .vscode/*
