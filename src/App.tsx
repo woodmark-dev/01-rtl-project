@@ -15,6 +15,7 @@ function App() {
         onChange={(e) => {
           setWish(e.target.value);
         }}
+        value={wish}
       />
       <button disabled={!hasWish} onClick={() => setWishSubmitted(true)}>
         Submit wish
