@@ -9,21 +9,29 @@ describe("App", () => {
 
   it("should allow the user to enter their wish", async () => {
     render(<App />);
-    await user.type(screen.getByLabelText("wish input"), "a wish");
+    const input = screen.getByRole("textbox", { name: "wish input" });
+    await user.type(input, "a wish");
+    expect(input).toHaveValue("a wish");
   });
 
   it("should enable button after a wish is entered", async () => {
     render(<App />);
-    await user.type(screen.getByLabelText("wish input"), "a wish");
-    expect(screen.getByText("Submit wish")).toBeEnabled();
+    await user.type(
+      screen.getByRole("textbox", { name: "wish input" }),
+      "a wish"
+    );
+    expect(screen.getByRole("button", { name: "Submit wish" })).toBeEnabled();
   });
 
   it("should replace the wish entry area with the wish after submission", async () => {
     render(<App />);
-    await user.type(screen.getByLabelText("wish input"), "a wish");
-    expect(screen.queryByText("Your wish is")).toBeNull();
-    await user.click(screen.getByText("Submit wish"));
-    expect(screen.getByText("a wish")).toBeInTheDocument();
-    expect(screen.queryByText("Make a wish")).toBeNull();
+    await user.type(
+      screen.getByRole("textbox", { name: "wish input" }),
+      "a wish"
+    );
+    expect(screen.queryByRole("heading", { name: "Your wish is" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Submit wish" }));
+    expect(screen.getByText("a wish", { exact: true })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Make a wish" })).toBeNull();
   });
 });

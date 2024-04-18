@@ -20,6 +20,7 @@ function App() {
       <button disabled={!hasWish} onClick={() => setWishSubmitted(true)}>
         Submit wish
       </button>
+      <p>a wish</p>
     </article>
   ) : (
     <article>
